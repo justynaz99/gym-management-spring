@@ -18,7 +18,7 @@ public class MemberResource {
         return memberService.findAll();
     }
 
-    @DeleteMapping("/members")
+    @DeleteMapping("/members/{id}")
     public ResponseEntity<Void> deleteMember(@PathVariable long id) {
         Member member = memberService.deleteById(id);
         if (member != null) {
