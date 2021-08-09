@@ -18,9 +18,8 @@ public class HelloWorldBean {
 
     @Override
     public String toString() {
-        return "HelloWorldBean{" +
+        return "com.gymmanagement.gymmanagement.helloworld.HelloWorldBean{" +
                 "message='" + message + '\'' +
                 '}';
     }
-
 }

@@ -13,15 +13,26 @@ public class MemberHardcodedService {
     private static int idCounter = 0;
 
     static {
-        members.add(new Member(++idCounter, "Justyna Zadora", "student", new Date()));
-        members.add(new Member(++idCounter, "Kamila Mucha", "student", new Date()));
-        members.add(new Member(++idCounter, "Marta Janusz", "student", new Date()));
-        members.add(new Member(++idCounter, "Lidia Pszczoła", "student", new Date()));
-        members.add(new Member(++idCounter, "Anna Caputa", "student", new Date()));
+        members.add(new Member(++idCounter, "Justyna", "Zadora", "student", new Date()));
+        members.add(new Member(++idCounter, "Kamila", "Mucha", "student", new Date()));
+        members.add(new Member(++idCounter, "Marta", "Janusz", "student", new Date()));
+        members.add(new Member(++idCounter, "Lidia", "Pszczoła", "student", new Date()));
+        members.add(new Member(++idCounter, "Anna", "Caputa", "student", new Date()));
     }
 
     public List<Member> findAll() {
         return members;
+    }
+
+    public Member save(Member member) {
+        if (member.getId() == -1 || member.getId() == 0) {
+            member.setId(++idCounter);
+        } else {
+            deleteById(member.getId());
+        }
+        members.add(member);
+
+        return member;
     }
 
     public Member deleteById(long id) {

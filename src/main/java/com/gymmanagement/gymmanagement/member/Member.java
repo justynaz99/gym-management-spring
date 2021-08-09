@@ -6,12 +6,16 @@ import java.util.Objects;
 public class Member {
     private long id;
     private String name;
+    private String surname;
     private String ticket;
     private Date expirationDate;
 
-    public Member(long id, String name, String ticket, Date expirationDate) {
+    protected Member() {}
+
+    public Member(long id, String name, String surname, String ticket, Date expirationDate) {
         this.id = id;
         this.name = name;
+        this.surname = surname;
         this.ticket = ticket;
         this.expirationDate = expirationDate;
     }
@@ -22,6 +26,14 @@ public class Member {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public String getName() {
@@ -60,4 +72,6 @@ public class Member {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+
 }
