@@ -1,6 +1,5 @@
-package com.gymmanagement.gymmanagement.basic.auth;
+package com.gymmanagement.basic.auth;
 
-import com.gymmanagement.gymmanagement.basic.auth.AuthenticationBean;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

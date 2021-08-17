@@ -1,4 +1,4 @@
-package com.gymmanagement.gymmanagement.basic.auth;
+package com.gymmanagement.basic.auth;
 
 public class AuthenticationBean {
 
