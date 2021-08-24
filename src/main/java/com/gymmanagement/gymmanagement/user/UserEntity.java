@@ -17,8 +17,8 @@ public class UserEntity {
     private Integer dateModification;
     private Integer whoModificated;
 
-
     @Id
+    @GeneratedValue
     @Column(name = "id_user")
     public int getIdUser() {
         return idUser;

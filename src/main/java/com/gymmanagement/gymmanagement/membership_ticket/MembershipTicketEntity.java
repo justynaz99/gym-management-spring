@@ -16,6 +16,7 @@ public class MembershipTicketEntity {
     private int idNetwork;
 
     @Id
+    @GeneratedValue
     @Column(name = "id_ticket")
     public int getIdTicket() {
         return idTicket;

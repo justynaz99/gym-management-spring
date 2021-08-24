@@ -1,10 +1,10 @@
-package com.gymmanagement.gymmanagement.user;
+package com.gymmanagement.gymmanagement.role;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends JpaRepository<UserEntity, Integer> {
+public interface RoleRepository extends JpaRepository<RoleEntity, Integer> {
 
 
 }
