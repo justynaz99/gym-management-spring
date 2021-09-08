@@ -10,11 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class AdminController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
-    @GetMapping("/admin/all")
-    public ResponseEntity<?> findAllUsers() {
+    @GetMapping("/api/admin/all")
+    public ResponseEntity<?> findAllUsers(){
         return ResponseEntity.ok(userService.findAllUsers());
     }
-
 }

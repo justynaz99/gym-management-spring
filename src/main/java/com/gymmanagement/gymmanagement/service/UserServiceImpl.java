@@ -5,8 +5,8 @@ import com.gymmanagement.gymmanagement.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -20,18 +20,19 @@ public class UserServiceImpl implements UserService {
     private PasswordEncoder passwordEncoder;
 
     @Override
-    public User saveUser(User user) {
+    public User saveUser(User user){
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
     @Override
-    public User findByEmail(String email) {
-        return userRepository.findUserByEmail(email).orElse(null);
+    public User findByUsername(String username){
+        return userRepository.findByUsername(username).orElse(null);
     }
 
     @Override
-    public List<User> findAllUsers() {
+    public List<User> findAllUsers(){
         return userRepository.findAll();
     }
 }
+
