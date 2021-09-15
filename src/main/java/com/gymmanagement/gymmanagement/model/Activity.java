@@ -1,92 +1,29 @@
 package com.gymmanagement.gymmanagement.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
+import java.io.Serializable;
 
+@Data
 @Entity
-@Table(name = "activity", schema = "gym_management")
-@IdClass(ActivityPK.class)
-public class Activity {
-
-    private int idActivity;
-    private String name;
-    private String description;
-    private int idClub;
-    private int clubIdNetwork;
+@Table(name = "activity")
+public class Activity implements Serializable {
 
     @Id
     @GeneratedValue
     @Column(name = "id_activity")
-    public int getIdActivity() {
-        return idActivity;
-    }
+    private int idActivity;
 
-    public void setIdActivity(int idActivity) {
-        this.idActivity = idActivity;
-    }
-
-    @Basic
     @Column(name = "name")
-    public String getName() {
-        return name;
-    }
+    private String name;
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Basic
     @Column(name = "description")
-    public String getDescription() {
-        return description;
-    }
+    private String description;
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    @Id
     @Column(name = "id_club")
-    public int getIdClub() {
-        return idClub;
-    }
+    private int idClub;
 
-    public void setIdClub(int idClub) {
-        this.idClub = idClub;
-    }
-
-    @Id
     @Column(name = "club_id_network")
-    public int getClubIdNetwork() {
-        return clubIdNetwork;
-    }
-
-    public void setClubIdNetwork(int clubIdNetwork) {
-        this.clubIdNetwork = clubIdNetwork;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Activity that = (Activity) o;
-
-        if (idActivity != that.idActivity) return false;
-        if (idClub != that.idClub) return false;
-        if (clubIdNetwork != that.clubIdNetwork) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (description != null ? !description.equals(that.description) : that.description != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = idActivity;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + idClub;
-        result = 31 * result + clubIdNetwork;
-        return result;
-    }
+    private int clubIdNetwork;
 }

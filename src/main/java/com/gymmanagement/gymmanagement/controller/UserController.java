@@ -11,6 +11,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.Date;
 
 @RestController
 public class UserController {
@@ -27,8 +28,16 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
         user.setRole(Role.USER);
+        user.setDateAdded(new Date());
+//        user.setWhoAdded(user.getIdUser()); TODO
         return new ResponseEntity<>(userService.saveUser(user), HttpStatus.CREATED);
     }
+
+    @PutMapping("/api/user/{id}/edit")
+    public ResponseEntity<User> updateUser(@PathVariable int id, @RequestBody User user) {
+        return new ResponseEntity<>(userService.saveUser(user), HttpStatus.OK);
+    }
+
 
     @GetMapping("/api/user/login")
     public ResponseEntity<?> login(Principal principal){
