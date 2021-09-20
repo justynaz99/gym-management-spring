@@ -42,7 +42,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/error",
                         "/api/user/**",
                         "/api/ticket-type/**",
-                        "/api/activity/**"
+                        "/api/activity/**",
+                        "/api/ticket/**"
                         ).permitAll()
                 //These can be reachable for just have admin role.
                 .antMatchers("/api/admin/**").hasRole("ADMIN")

@@ -35,6 +35,11 @@ public class UserController {
 
     @PutMapping("/api/user/{id}/edit")
     public ResponseEntity<User> updateUser(@PathVariable int id, @RequestBody User user) {
+        return new ResponseEntity<>(userService.saveUserOnUpdate(user), HttpStatus.OK);
+    }
+
+    @PutMapping("/api/user/{id}/edit-password")
+    public ResponseEntity<User> updatePassword(@PathVariable int id, @RequestBody User user) {
         return new ResponseEntity<>(userService.saveUser(user), HttpStatus.OK);
     }
 

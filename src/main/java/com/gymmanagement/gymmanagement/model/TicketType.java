@@ -32,3 +32,4 @@ public class TicketType implements Serializable {
     private int clubIdNetwork;
 
 }
+
