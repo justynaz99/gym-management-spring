@@ -40,13 +40,27 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(
                         "/resources/**",
                         "/error",
-                        "/api/user/**",
-                        "/api/ticket-type/**",
+                        "/api/user/registration",
+                        "/api/user/login",
+                        "/api/ticket-type/all",
                         "/api/activity/**",
-                        "/api/ticket/**"
+                        "/api/ticket-type/{id}",
+                        "/api/ticket-type/add",
+                        "/api/ticket-type/{id}/edit",
+                        "/api/ticket-type/{id}/delete"
                         ).permitAll()
+                //These can be reachable for just have user role.
+                .antMatchers(
+                        "/api/user/{id}/edit",
+                        "/api/user/{id}/edit-password",
+                        "/api/ticket/all/{id}"
+                        )
+                .hasRole("USER")
                 //These can be reachable for just have admin role.
-                .antMatchers("/api/admin/**").hasRole("ADMIN")
+                .antMatchers(
+                        "/api/admin/**"
+                        )
+                .hasRole("ADMIN")
                 //all remaining paths should need authentication.
                 .anyRequest().fullyAuthenticated()
                 .and()

@@ -1,12 +1,14 @@
 package com.gymmanagement.gymmanagement.repository;
 
-import com.gymmanagement.gymmanagement.model.Ticket;
+import com.gymmanagement.gymmanagement.model.MembershipTicket;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface TicketRepository extends JpaRepository<Ticket, Integer> {
+@Repository
+public interface TicketRepository extends JpaRepository<MembershipTicket, Integer> {
 
-    List<Ticket> findTicketsByIdUser(int idUser);
+    List<MembershipTicket> findTicketsByIdUser(int idUser);
 
 }

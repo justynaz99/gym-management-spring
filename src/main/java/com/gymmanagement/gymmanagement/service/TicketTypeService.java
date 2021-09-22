@@ -1,12 +1,18 @@
 package com.gymmanagement.gymmanagement.service;
 
-import com.gymmanagement.gymmanagement.model.TicketType;
+import com.gymmanagement.gymmanagement.model.MembershipTicketType;
 
 import java.util.List;
 
 public interface TicketTypeService {
 
-    TicketType findByName(String name);
+    MembershipTicketType findByName(String name);
 
-    List<TicketType> findAllTicketTypes();
+    List<MembershipTicketType> findAllTicketTypes();
+
+    MembershipTicketType saveTicketType(MembershipTicketType ticketType);
+
+    MembershipTicketType findById(int id);
+
+    void deleteTicketById(int id);
 }

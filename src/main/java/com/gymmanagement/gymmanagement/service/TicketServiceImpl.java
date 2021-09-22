@@ -1,6 +1,6 @@
 package com.gymmanagement.gymmanagement.service;
 
-import com.gymmanagement.gymmanagement.model.Ticket;
+import com.gymmanagement.gymmanagement.model.MembershipTicket;
 import com.gymmanagement.gymmanagement.repository.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ public class TicketServiceImpl implements TicketService {
     TicketRepository ticketRepository;
 
     @Override
-    public List<Ticket> findTicketsByIdUser(int idUser) {
+    public List<MembershipTicket> findTicketsByIdUser(int idUser) {
         return ticketRepository.findTicketsByIdUser(idUser);
     }
 }

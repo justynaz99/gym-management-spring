@@ -1,5 +1,6 @@
 package com.gymmanagement.gymmanagement.model;
 
+
 import lombok.Data;
 
 import javax.persistence.*;
@@ -10,10 +11,11 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "membership_ticket_type")
 
-public class TicketType implements Serializable {
+public class MembershipTicketType implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_type")
     private int idType;
 
     @Column(name = "price")
@@ -31,5 +33,12 @@ public class TicketType implements Serializable {
     @Column(name = "club_id_network")
     private int clubIdNetwork;
 
-}
+//    @OneToMany(mappedBy = "membershipTicketType")
+//    private Collection<MembershipTicket> membershipTickets;
+//
+//    @ManyToOne
+//    @JoinColumns({@JoinColumn(name = "id_club", referencedColumnName = "id_club", nullable = false),
+//            @JoinColumn(name = "club_id_network", referencedColumnName = "id_network", nullable = false)})
+//    private Club club;
 
+}
