@@ -19,4 +19,19 @@ public class ActivityServiceImpl implements ActivityService {
     public List<Activity> findAllActivities() {
         return activityRepository.findAll();
     }
+
+    @Override
+    public Activity saveActivity(Activity activity) {
+        return activityRepository.save(activity);
+    }
+
+    @Override
+    public Activity findActivityById(int id) {
+        return activityRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void deleteActivity(int id) {
+        activityRepository.deleteById(id);
+    }
 }

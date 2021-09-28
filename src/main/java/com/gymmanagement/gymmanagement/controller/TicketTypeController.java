@@ -27,18 +27,18 @@ public class TicketTypeController {
     }
 
     @PutMapping("/api/ticket-type/{id}/edit")
-    public ResponseEntity<MembershipTicketType> updateTicket(@PathVariable int id, @RequestBody MembershipTicketType membershipTicketType) {
+    public ResponseEntity<MembershipTicketType> updateTicketType(@PathVariable int id, @RequestBody MembershipTicketType membershipTicketType) {
         return new ResponseEntity<>(ticketTypeService.saveTicketType(membershipTicketType), HttpStatus.OK);
     }
 
     @GetMapping("/api/ticket-type/{id}")
     public ResponseEntity<?> findTicketTypeById(@PathVariable int id) {
-        return ResponseEntity.ok(ticketTypeService.findById(id));
+        return new ResponseEntity<>(ticketTypeService.findTicketTypeById(id), HttpStatus.OK);
     }
 
     @DeleteMapping("/api/ticket-type/{id}/delete")
     public ResponseEntity<?> deleteTicketType(@PathVariable int id) {
-        ticketTypeService.deleteTicketById(id);
+        ticketTypeService.deleteTicketTypeById(id);
         return new ResponseEntity<>(id, HttpStatus.OK);
     }
 

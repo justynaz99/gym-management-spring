@@ -38,28 +38,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 //These are public pages.
                 .antMatchers(
-                        "/resources/**",
                         "/error",
-                        "/api/user/registration",
-                        "/api/user/login",
-                        "/api/ticket-type/all",
+                        "/api/user/**",
+                        "/api/ticket/**",
                         "/api/activity/**",
-                        "/api/ticket-type/{id}",
-                        "/api/ticket-type/add",
-                        "/api/ticket-type/{id}/edit",
-                        "/api/ticket-type/{id}/delete"
+                        "/api/ticket-type/**"
                         ).permitAll()
                 //These can be reachable for just have user role.
-                .antMatchers(
-                        "/api/user/{id}/edit",
-                        "/api/user/{id}/edit-password",
-                        "/api/ticket/all/{id}"
-                        )
-                .hasRole("USER")
+                .antMatchers().hasRole("USER")
                 //These can be reachable for just have admin role.
-                .antMatchers(
-                        "/api/admin/**"
-                        )
+                .antMatchers("/api/admin/**")
                 .hasRole("ADMIN")
                 //all remaining paths should need authentication.
                 .anyRequest().fullyAuthenticated()

@@ -31,12 +31,12 @@ public class TicketTypeServiceImpl implements TicketTypeService {
     }
 
     @Override
-    public MembershipTicketType findById(int id) {
+    public MembershipTicketType findTicketTypeById(int id) {
         return ticketTypeRepository.findById(id).orElse(null);
     }
 
     @Override
-    public void deleteTicketById(int id) {
+    public void deleteTicketTypeById(int id) {
         ticketTypeRepository.deleteById(id);
     }
 }

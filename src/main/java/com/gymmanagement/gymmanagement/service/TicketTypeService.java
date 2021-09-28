@@ -12,7 +12,7 @@ public interface TicketTypeService {
 
     MembershipTicketType saveTicketType(MembershipTicketType ticketType);
 
-    MembershipTicketType findById(int id);
+    MembershipTicketType findTicketTypeById(int id);
 
-    void deleteTicketById(int id);
+    void deleteTicketTypeById(int id);
 }

@@ -24,7 +24,7 @@ public class UserController {
 
     @PostMapping("/api/user/registration")
     public ResponseEntity<?> register(@RequestBody User user){
-        if(userService.findByUsername(user.getUsername()) != null){
+        if(userService.findUserByUsername(user.getUsername()) != null){
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
         user.setRole(Role.USER);
@@ -51,8 +51,13 @@ public class UserController {
             return ResponseEntity.ok(principal);
         }
         UsernamePasswordAuthenticationToken authenticationToken = (UsernamePasswordAuthenticationToken) principal;
-        User user = userService.findByUsername(authenticationToken.getName());
+        User user = userService.findUserByUsername(authenticationToken.getName());
         user.setToken(jwtTokenProvider.generateToken(authenticationToken));
         return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+    @GetMapping("/api/user/{username}")
+    public ResponseEntity<User> findUserByUsername(@PathVariable String username) {
+        return new ResponseEntity<User>(userService.findUserByUsername(username), HttpStatus.OK);
     }
 }

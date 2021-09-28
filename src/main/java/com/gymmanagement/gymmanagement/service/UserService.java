@@ -9,7 +9,7 @@ public interface UserService {
 
     User saveUserOnUpdate(User user);
 
-    User findByUsername(String username);
+    User findUserByUsername(String username);
 
     List<User> findAllUsers();
 }
