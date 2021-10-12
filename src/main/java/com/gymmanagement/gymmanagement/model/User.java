@@ -52,4 +52,7 @@ public class User implements Serializable {
 
     @Transient
     private String token;
+
+    @Column(name = "reset_password_token")
+    private String resetPasswordToken;
 }

@@ -12,4 +12,10 @@ public interface UserService {
     User findUserByUsername(String username);
 
     List<User> findAllUsers();
+
+    void updateResetPasswordToken(String token, String username);
+
+    User findByResetPasswordToken(String token);
+
+    void updatePassword(User user, String newPassword);
 }
