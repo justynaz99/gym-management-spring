@@ -7,4 +7,6 @@ import java.util.List;
 public interface TicketService {
 
     List<MembershipTicket> findTicketsByIdUser(int idUser);
+
+    MembershipTicket buyTicket(MembershipTicket ticket);
 }

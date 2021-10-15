@@ -19,4 +19,9 @@ public class TicketServiceImpl implements TicketService {
     public List<MembershipTicket> findTicketsByIdUser(int idUser) {
         return ticketRepository.findTicketsByIdUser(idUser);
     }
+
+    @Override
+    public MembershipTicket buyTicket(MembershipTicket ticket) {
+        return ticketRepository.save(ticket);
+    }
 }

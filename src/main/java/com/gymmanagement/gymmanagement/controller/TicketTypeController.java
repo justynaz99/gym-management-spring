@@ -21,8 +21,8 @@ public class TicketTypeController {
 
     @PostMapping("/api/ticket-type/add")
     public ResponseEntity<?> addTicketType(@RequestBody MembershipTicketType ticketType) {
-        ticketType.setIdClub(1);
-        ticketType.setClubIdNetwork(1);
+//        ticketType.setIdClub(1);
+//        ticketType.setClubIdNetwork(1);
         return new ResponseEntity<>(ticketTypeService.saveTicketType(ticketType), HttpStatus.CREATED);
     }
 

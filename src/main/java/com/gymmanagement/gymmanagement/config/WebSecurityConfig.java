@@ -40,6 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(
                         "/error",
                         "/api/user/**",
+                        "/api/user_role/**",
                         "/api/ticket/**",
                         "/api/activity/**",
                         "/api/ticket-type/**"

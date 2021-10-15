@@ -22,17 +22,12 @@ public class MembershipTicket implements Serializable {
     @Column(name = "expiration_date")
     private Date expirationDate;
 
-    @Column(name = "id_type")
-    private int idType;
-
-    @Column(name = "id_club")
-    private int idClub;
-
     @Column(name = "id_user")
     private int idUser;
 
-    @Column(name = "id_network")
-    private int idNetwork;
+    @ManyToOne
+    @JoinColumns({@JoinColumn(name = "id_type", referencedColumnName = "id_type", nullable = false)})
+    private MembershipTicketType membershipTicketType;
 
 
 

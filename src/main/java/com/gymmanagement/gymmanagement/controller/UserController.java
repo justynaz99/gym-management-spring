@@ -1,8 +1,8 @@
 package com.gymmanagement.gymmanagement.controller;
 
 import com.gymmanagement.gymmanagement.jwt.JwtTokenProvider;
-import com.gymmanagement.gymmanagement.model.Role;
 import com.gymmanagement.gymmanagement.model.User;
+import com.gymmanagement.gymmanagement.service.RoleService;
 import com.gymmanagement.gymmanagement.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,15 +22,35 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private RoleService roleService;
+
     @PostMapping("/api/user/registration")
     public ResponseEntity<?> register(@RequestBody User user){
         if(userService.findUserByUsername(user.getUsername()) != null){
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
-        user.setRole(Role.USER);
-        user.setDateAdded(new Date());
-//        user.setWhoAdded(user.getIdUser()); TODO
-        return new ResponseEntity<>(userService.saveUser(user), HttpStatus.CREATED);
+
+        User savedUser = userService.saveUser(user);
+
+        savedUser.setDateAdded(new Date());
+        savedUser.setWhoAdded(savedUser.getIdUser());
+
+        userService.saveUserOnUpdate(savedUser);
+
+//        Role role = roleService.findByName("USER");
+//
+//        System.out.println("Znaleziona rola: " + role.getName());
+
+
+//        UserRole role = new UserRole();
+//        role.setUser(savedUser);
+//        role.setRole(roleService.findByName("USER"));
+//        role.setIdUserRole(1);
+//        System.out.println("Rola: " + role);
+//        userRoleService.saveUserRole(role);
+
+        return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
 
     @PutMapping("/api/user/{id}/edit")
