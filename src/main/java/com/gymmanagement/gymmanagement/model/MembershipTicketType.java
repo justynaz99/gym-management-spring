@@ -35,12 +35,6 @@ public class MembershipTicketType implements Serializable {
 
 //    @OneToMany(mappedBy = "membershipTicketType")
 //    private Collection<MembershipTicket> membershipTickets;
-//
-//    @ManyToOne
-//    @JoinColumns({@JoinColumn(name = "id_club", referencedColumnName = "id_club", nullable = false),
-////            @JoinColumn(name = "club_id_network", referencedColumnName = "id_network", nullable = false)
-//    })
-//    private Club club;
 
 
 

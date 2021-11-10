@@ -63,5 +63,10 @@ public class UserServiceImpl implements UserService {
         user.setResetPasswordToken(null);
         userRepository.save(user);
     }
+
+    @Override
+    public User findUserById(int id) {
+        return userRepository.findByIdUser(id);
+    }
 }
 

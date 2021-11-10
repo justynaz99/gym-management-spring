@@ -12,7 +12,7 @@ import java.sql.Date;
 public class MembershipTicket implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_ticket")
     private int idTicket;
 
@@ -25,9 +25,16 @@ public class MembershipTicket implements Serializable {
     @Column(name = "id_user")
     private int idUser;
 
+    @Column(name = "id_club")
+    private int idClub;
+
+    @Column(name = "id_network")
+    private int idNetwork;
+
     @ManyToOne
     @JoinColumns({@JoinColumn(name = "id_type", referencedColumnName = "id_type", nullable = false)})
     private MembershipTicketType membershipTicketType;
+
 
 
 

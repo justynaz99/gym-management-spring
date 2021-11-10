@@ -76,8 +76,20 @@ public class UserController {
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-    @GetMapping("/api/user/{username}")
-    public ResponseEntity<User> findUserByUsername(@PathVariable String username) {
-        return new ResponseEntity<User>(userService.findUserByUsername(username), HttpStatus.OK);
+//    @GetMapping("/api/user/{username}")
+//    public ResponseEntity<User> findUserByUsername(@PathVariable String username) {
+//        return new ResponseEntity<User>(userService.findUserByUsername(username), HttpStatus.OK);
+//    }
+
+    @GetMapping("/api/user/{id}")
+    public ResponseEntity<User> findUserByIdUser(@PathVariable int id) {
+        return new ResponseEntity<User>(userService.findUserById(id), HttpStatus.OK);
     }
+
+    @GetMapping("/api/user/all")
+    public ResponseEntity<?> findAllUsers(){
+        return ResponseEntity.ok(userService.findAllUsers());
+    }
+
+
 }

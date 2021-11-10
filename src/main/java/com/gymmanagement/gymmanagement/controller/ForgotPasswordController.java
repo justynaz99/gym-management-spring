@@ -6,6 +6,7 @@ import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -28,10 +29,17 @@ public class ForgotPasswordController {
         String username = request.getParameter("username");
         String token = RandomString.make(30);
 
-        userService.updateResetPasswordToken(token, username);
-        String resetPasswordLink = Utility.getSiteURL(request) + "/api/user/reset_password?token=" + token;
-        sendEmail(username, resetPasswordLink);
-    }
+        try {
+            userService.updateResetPasswordToken(token, username);
+            String resetPasswordLink = Utility.getSiteURL(request) + "/api/user/reset_password?token=" + token;
+            sendEmail(username, resetPasswordLink);
+        } catch (UsernameNotFoundException ex) {
+
+        } catch (UnsupportedEncodingException | MessagingException e) {
+
+        }
+        }
+
 
     public void sendEmail(String recipientEmail, String link) throws MessagingException, UnsupportedEncodingException {
         MimeMessage message = mailSender.createMimeMessage();

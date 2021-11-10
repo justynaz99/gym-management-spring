@@ -18,4 +18,6 @@ public interface UserService {
     User findByResetPasswordToken(String token);
 
     void updatePassword(User user, String newPassword);
+
+    User findUserById(int id);
 }
