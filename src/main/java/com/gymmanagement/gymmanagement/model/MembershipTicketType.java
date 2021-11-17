@@ -24,14 +24,17 @@ public class MembershipTicketType implements Serializable {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "duration")
+    private int duration;
+
     @Column(name = "description")
     private String description;
 
     @Column(name = "id_club")
     private int idClub;
 
-    @Column(name = "club_id_network")
-    private int clubIdNetwork;
+    @Column(name = "id_network")
+    private int idNetwork;
 
 //    @OneToMany(mappedBy = "membershipTicketType")
 //    private Collection<MembershipTicket> membershipTickets;

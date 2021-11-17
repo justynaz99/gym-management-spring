@@ -22,6 +22,9 @@ public class MembershipTicket implements Serializable {
     @Column(name = "expiration_date")
     private Date expirationDate;
 
+    @Column(name = "status")
+    private Boolean status;
+
     @Column(name = "id_user")
     private int idUser;
 

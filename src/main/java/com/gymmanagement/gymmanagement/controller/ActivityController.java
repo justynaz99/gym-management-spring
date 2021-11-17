@@ -22,7 +22,7 @@ public class ActivityController {
     @PostMapping("/api/activity/add")
     public ResponseEntity<?> addActivity(@RequestBody Activity activity) {
         activity.setIdClub(1);
-        activity.setClubIdNetwork(1);
+        activity.setIdNetwork(1);
         return new ResponseEntity<>(activityService.saveActivity(activity), HttpStatus.CREATED);
     }
 

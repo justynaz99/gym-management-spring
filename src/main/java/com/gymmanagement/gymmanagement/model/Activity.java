@@ -24,6 +24,6 @@ public class Activity implements Serializable {
     @Column(name = "id_club")
     private int idClub;
 
-    @Column(name = "club_id_network")
-    private int clubIdNetwork;
+    @Column(name = "id_network")
+    private int idNetwork;
 }
