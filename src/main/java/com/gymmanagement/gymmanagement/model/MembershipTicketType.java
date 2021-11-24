@@ -30,14 +30,16 @@ public class MembershipTicketType implements Serializable {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "id_club")
-    private int idClub;
+//    @Column(name = "id_club")
+//    private int idClub;
 
-    @Column(name = "id_network")
-    private int idNetwork;
+//    @Column(name = "id_network")
+//    private int idNetwork;
 
-//    @OneToMany(mappedBy = "membershipTicketType")
-//    private Collection<MembershipTicket> membershipTickets;
+    @ManyToOne
+    @JoinColumns({@JoinColumn(name = "id_club", referencedColumnName = "id_club", nullable = false),
+            @JoinColumn(name = "id_network", referencedColumnName = "id_network", nullable = false)})
+    private Club club;
 
 
 

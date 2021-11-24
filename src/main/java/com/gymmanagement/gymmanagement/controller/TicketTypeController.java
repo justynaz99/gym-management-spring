@@ -1,6 +1,8 @@
 package com.gymmanagement.gymmanagement.controller;
 
+import com.gymmanagement.gymmanagement.model.Club;
 import com.gymmanagement.gymmanagement.model.MembershipTicketType;
+import com.gymmanagement.gymmanagement.service.ClubService;
 import com.gymmanagement.gymmanagement.service.TicketTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +16,9 @@ public class TicketTypeController {
     @Autowired
     private TicketTypeService ticketTypeService;
 
+    @Autowired
+    private ClubService clubService;
+
     @GetMapping("/api/ticket-type/all")
     public ResponseEntity<?> findAllTicketTypes() {
         return ResponseEntity.ok(ticketTypeService.findAllTicketTypes());
@@ -21,8 +26,8 @@ public class TicketTypeController {
 
     @PostMapping("/api/ticket-type/add")
     public ResponseEntity<?> addTicketType(@RequestBody MembershipTicketType ticketType) {
-//        ticketType.setIdClub(1);
-//        ticketType.setClubIdNetwork(1);
+        Club club = clubService.findClubById(1);
+        ticketType.setClub(club);
         return new ResponseEntity<>(ticketTypeService.saveTicketType(ticketType), HttpStatus.CREATED);
     }
 

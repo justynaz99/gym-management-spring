@@ -1,8 +1,12 @@
 package com.gymmanagement.gymmanagement.controller;
 
 import com.gymmanagement.gymmanagement.jwt.JwtTokenProvider;
+import com.gymmanagement.gymmanagement.model.Role;
 import com.gymmanagement.gymmanagement.model.User;
+import com.gymmanagement.gymmanagement.model.UserRole;
+import com.gymmanagement.gymmanagement.service.EnrollmentService;
 import com.gymmanagement.gymmanagement.service.RoleService;
+import com.gymmanagement.gymmanagement.service.UserRoleService;
 import com.gymmanagement.gymmanagement.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,6 +29,12 @@ public class UserController {
     @Autowired
     private RoleService roleService;
 
+    @Autowired
+    private UserRoleService userRoleService;
+
+    @Autowired
+    EnrollmentService enrollmentService;
+
     @PostMapping("/api/user/registration")
     public ResponseEntity<?> register(@RequestBody User user){
         if(userService.findUserByUsername(user.getUsername()) != null){
@@ -38,17 +48,12 @@ public class UserController {
 
         userService.saveUserOnUpdate(savedUser);
 
-//        Role role = roleService.findByName("USER");
-//
-//        System.out.println("Znaleziona rola: " + role.getName());
+        Role role = roleService.findByName("USER");
+        UserRole userRole = new UserRole();
+        userRole.setIdUser(savedUser.getIdUser());
+        userRole.setIdRole(role.getIdRole());
+        userRoleService.saveUserRole(userRole);
 
-
-//        UserRole role = new UserRole();
-//        role.setUser(savedUser);
-//        role.setRole(roleService.findByName("USER"));
-//        role.setIdUserRole(1);
-//        System.out.println("Rola: " + role);
-//        userRoleService.saveUserRole(role);
 
         return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
@@ -89,6 +94,19 @@ public class UserController {
     @GetMapping("/api/user/all")
     public ResponseEntity<?> findAllUsers(){
         return ResponseEntity.ok(userService.findAllUsers());
+    }
+
+    @DeleteMapping("/api/user/{id}/delete")
+    ResponseEntity<?> deleteUserById(@PathVariable int id) {
+        userRoleService.deleteUserRoleByIdUser(id);
+        enrollmentService.deleteAllByIdUser(id);
+        userService.deleteUserByIdUser(id);
+        return new ResponseEntity<>(id, HttpStatus.OK);
+    }
+
+    @GetMapping("/api/user/{id}/roles")
+    ResponseEntity<?> findUserRolesByIdUser(@PathVariable int id) {
+        return ResponseEntity.ok(userRoleService.findUserRoleByIdUser(id));
     }
 
 

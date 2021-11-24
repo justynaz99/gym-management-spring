@@ -40,4 +40,9 @@ public class ActivityPositionInScheduleServiceImpl implements ActivityPositionIn
     public List<ActivityPositionInSchedule> findAllPositionsByDate(Date date) {
         return activityPositionInScheduleRepository.findAllByDateEquals(date);
     }
+
+    @Override
+    public List<ActivityPositionInSchedule> findPositionsByIdActivity(int id) {
+        return activityPositionInScheduleRepository.findByActivity_IdActivity(id);
+    }
 }

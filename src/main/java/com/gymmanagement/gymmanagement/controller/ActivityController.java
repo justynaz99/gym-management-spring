@@ -1,18 +1,22 @@
 package com.gymmanagement.gymmanagement.controller;
 
 import com.gymmanagement.gymmanagement.model.Activity;
+import com.gymmanagement.gymmanagement.service.ActivityPositionInScheduleService;
 import com.gymmanagement.gymmanagement.service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins="http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class ActivityController {
 
     @Autowired
     ActivityService activityService;
+
+    @Autowired
+    ActivityPositionInScheduleService scheduleService;
 
     @GetMapping("/api/activity/all")
     public ResponseEntity<?> findAllActivities() {
@@ -38,8 +42,12 @@ public class ActivityController {
 
     @DeleteMapping("/api/activity/{id}/delete")
     public ResponseEntity<?> deleteActivity(@PathVariable int id) {
-        activityService.deleteActivity(id);
-        return new ResponseEntity<>(id, HttpStatus.OK);
+        try {
+            activityService.deleteActivity(id);
+            return new ResponseEntity<>(id, HttpStatus.OK);
+        } catch (Exception ex) {
+            return null;
+        }
     }
 
 }

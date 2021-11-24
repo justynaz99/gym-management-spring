@@ -44,7 +44,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/api/ticket/**",
                         "/api/activity/**",
                         "/api/ticket-type/**",
-                        "/api/schedule/**"
+                        "/api/schedule/**",
+                        "/api/enrollment/**"
                         ).permitAll()
                 //These can be reachable for just have user role.
                 .antMatchers().hasRole("USER")

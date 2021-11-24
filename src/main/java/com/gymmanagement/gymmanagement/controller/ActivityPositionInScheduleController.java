@@ -23,7 +23,7 @@ public class ActivityPositionInScheduleController {
     }
 
     @GetMapping("/api/schedule/{date}/all")
-    public ResponseEntity<?> findAllPositionsByDate(@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) {
+    public ResponseEntity<?> findAllPositionsByDate(@PathVariable @DateTimeFormat(pattern = "dd.MM.yyyy") Date date) {
         return ResponseEntity.ok(activityPositionInScheduleService.findAllPositionsByDate(date));
     }
 

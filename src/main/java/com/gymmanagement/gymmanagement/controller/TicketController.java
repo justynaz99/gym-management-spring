@@ -27,7 +27,6 @@ public class TicketController {
 
     @PostMapping("api/ticket/buy")
     public ResponseEntity<?> buyTicket(@RequestBody MembershipTicket ticket) {
-        System.out.println(ticket);
         return new ResponseEntity<>(ticketService.saveTicket(ticket), HttpStatus.CREATED);
     }
 

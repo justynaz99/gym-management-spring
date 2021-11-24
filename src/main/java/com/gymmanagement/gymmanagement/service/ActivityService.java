@@ -13,4 +13,5 @@ public interface ActivityService {
     Activity findActivityById(int id);
 
     void deleteActivity(int id);
+
 }

@@ -16,4 +16,6 @@ public interface ActivityPositionInScheduleService {
     void deletePosition(int id);
 
     List<ActivityPositionInSchedule> findAllPositionsByDate(Date date);
+
+    List<ActivityPositionInSchedule> findPositionsByIdActivity(int id);
 }
