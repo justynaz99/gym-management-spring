@@ -25,7 +25,7 @@ public class TicketController {
         return ResponseEntity.ok(ticketService.findTicketsByIdUser(id));
     }
 
-    @PostMapping("api/ticket/buy")
+    @PostMapping("api/ticket/save")
     public ResponseEntity<?> buyTicket(@RequestBody MembershipTicket ticket) {
         return new ResponseEntity<>(ticketService.saveTicket(ticket), HttpStatus.CREATED);
     }
@@ -34,5 +34,16 @@ public class TicketController {
     public ResponseEntity<? > deleteTicketWhenExpires(@PathVariable Date expirationDate) {
         ticketService.deleteTicketByExpirationDate(expirationDate);
         return new ResponseEntity<>(expirationDate, HttpStatus.OK);
+    }
+
+    @GetMapping("/api/ticket/{id}")
+    public ResponseEntity<?> findTicketByIdTicket(@PathVariable int id) {
+        return ResponseEntity.ok(ticketService.findTicketByIdTicket(id));
+    }
+
+    @DeleteMapping("/api/ticket/{id}/delete")
+    public ResponseEntity<?> deleteTicketById(@PathVariable int id) {
+        ticketService.deleteTicketByIdTicket(id);
+        return new ResponseEntity<>(id, HttpStatus.OK);
     }
 }

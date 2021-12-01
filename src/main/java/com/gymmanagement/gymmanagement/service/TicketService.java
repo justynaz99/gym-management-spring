@@ -12,4 +12,9 @@ public interface TicketService {
     MembershipTicket saveTicket(MembershipTicket ticket);
 
     void deleteTicketByExpirationDate(Date expirationDate);
+
+    MembershipTicket findTicketByIdTicket(int id);
+
+    void deleteTicketByIdTicket(int id);
+
 }

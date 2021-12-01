@@ -2,9 +2,11 @@ package com.gymmanagement.gymmanagement.service;
 
 import com.gymmanagement.gymmanagement.model.UserRole;
 
+import java.util.List;
+
 public interface UserRoleService {
 
-    UserRole findUserRoleByIdUser(int id);
+    List<UserRole> findAllByIdUser(int id);
 
     void deleteUserRoleByIdUser(int id);
 

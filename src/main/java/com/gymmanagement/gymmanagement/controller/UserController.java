@@ -106,7 +106,7 @@ public class UserController {
 
     @GetMapping("/api/user/{id}/roles")
     ResponseEntity<?> findUserRolesByIdUser(@PathVariable int id) {
-        return ResponseEntity.ok(userRoleService.findUserRoleByIdUser(id));
+        return ResponseEntity.ok(userRoleService.findAllByIdUser(id));
     }
 
 

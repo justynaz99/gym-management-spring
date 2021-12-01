@@ -18,7 +18,7 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public List<MembershipTicket> findTicketsByIdUser(int idUser) {
-        return ticketRepository.findTicketsByIdUser(idUser);
+        return ticketRepository.findTicketsByIdUserOrderByExpirationDateDesc(idUser);
     }
 
     @Override
@@ -29,5 +29,15 @@ public class TicketServiceImpl implements TicketService {
     @Override
     public void deleteTicketByExpirationDate(Date expirationDate) {
         ticketRepository.deleteMembershipTicketByExpirationDateEquals(expirationDate);
+    }
+
+    @Override
+    public MembershipTicket findTicketByIdTicket(int id) {
+        return ticketRepository.findByIdTicket(id);
+    }
+
+    @Override
+    public void deleteTicketByIdTicket(int id) {
+        ticketRepository.deleteMembershipTicketByIdTicket(id);
     }
 }

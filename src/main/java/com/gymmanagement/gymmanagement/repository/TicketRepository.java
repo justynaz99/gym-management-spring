@@ -10,9 +10,15 @@ import java.util.List;
 @Repository
 public interface TicketRepository extends JpaRepository<MembershipTicket, Integer> {
 
-    List<MembershipTicket> findTicketsByIdUser(int idUser);
+    List<MembershipTicket> findTicketsByIdUserOrderByExpirationDateDesc(int idUser);
 
     void deleteMembershipTicketByExpirationDateEquals(Date expirationDate);
+
+    MembershipTicket findByIdTicket(int id);
+
+    void deleteMembershipTicketByIdTicket(int id);
+
+
 
 
 

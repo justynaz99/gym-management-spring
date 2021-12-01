@@ -1,6 +1,5 @@
 package com.gymmanagement.gymmanagement.controller;
 
-import com.gymmanagement.gymmanagement.model.ActivityPositionInSchedule;
 import com.gymmanagement.gymmanagement.model.Enrollment;
 import com.gymmanagement.gymmanagement.service.ActivityPositionInScheduleService;
 import com.gymmanagement.gymmanagement.service.EnrollmentService;
@@ -29,9 +28,9 @@ public class EnrollmentController {
         return new ResponseEntity<>(enrollmentService.findAllByIdUser(id), HttpStatus.OK);
     }
 
-    @GetMapping("/api/enrollment/{id}/all_by_position")
-    public ResponseEntity<?> findAllByPosition(@PathVariable int id) {
-        ActivityPositionInSchedule position = scheduleService.findPositionById(id);
-        return new ResponseEntity<>(enrollmentService.findAllByPosition(position), HttpStatus.OK);
-    }
+//    @GetMapping("/api/enrollment/{id}/all_by_position")
+//    public ResponseEntity<?> findAllByPosition(@PathVariable int id) {
+//        ActivityPositionInSchedule position = scheduleService.findPositionById(id);
+//        return new ResponseEntity<>(enrollmentService.findAllByPosition(position), HttpStatus.OK);
+//    }
 }
