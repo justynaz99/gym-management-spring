@@ -15,7 +15,7 @@ public class ActivityPositionInSchedule implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_position")
-    private int idPosition;
+    private Integer idPosition;
 
     @Column(name = "date")
     private Date date;
@@ -29,11 +29,11 @@ public class ActivityPositionInSchedule implements Serializable {
     @Column(name = "coach")
     private String coach;
 
-//    @Column(name = "id_club")
-//    private int idClub;
-//
-//    @Column(name = "id_network")
-//    private int idNetwork;
+    @Column(name = "participants_quantity")
+    private int participantsQuantity;
+
+    @Column(name = "max_participants")
+    private int maxParticipants;
 
     @ManyToOne
     @JoinColumns({@JoinColumn(name = "id_activity", referencedColumnName = "id_activity", nullable = false),

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -16,6 +17,9 @@ public class EnrollmentServiceImpl implements EnrollmentService {
 
     @Autowired
     EnrollmentRepository enrollmentRepository;
+
+    @Autowired
+    ActivityPositionInScheduleService scheduleService;
 
     @Override
     public Enrollment signUpForActivity(Enrollment enrollment) {
@@ -35,5 +39,25 @@ public class EnrollmentServiceImpl implements EnrollmentService {
     @Override
     public void deleteAllByIdUser(int id) {
         enrollmentRepository.deleteAllByIdUser(id);
+    }
+
+    @Override
+    public void deleteByIdEnrollment(int id) {
+        enrollmentRepository.deleteByIdEnrollment(id);
+    }
+
+    @Override
+    public Enrollment findByIdEnrollment(int id) {
+        return enrollmentRepository.findByIdEnrollment(id);
+    }
+
+    @Override
+    public Enrollment findByPositionAndIdUser(ActivityPositionInSchedule position, int id) {
+        return enrollmentRepository.findByPositionAndIdUser(position, id);
+    }
+
+    @Override
+    public void deleteByPosition_Date(Date date) {
+        enrollmentRepository.deleteByPosition_Date(date);
     }
 }

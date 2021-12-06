@@ -13,4 +13,8 @@ public interface ActivityPositionInScheduleRepository extends JpaRepository<Acti
     List<ActivityPositionInSchedule> findAllByDateEquals(Date date);
 
     List<ActivityPositionInSchedule> findByActivity_IdActivity(int id);
+
+    ActivityPositionInSchedule findByIdPosition(int id);
+
+    void deleteAllByDateLessThanEqual(Date date);
 }

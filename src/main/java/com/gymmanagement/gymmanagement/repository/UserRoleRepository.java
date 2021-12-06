@@ -10,4 +10,8 @@ public interface UserRoleRepository extends JpaRepository<UserRole, Integer> {
     List<UserRole> findAllByIdUser(int id);
 
     void deleteUserRoleByIdUser(int id);
+
+
+
+
 }

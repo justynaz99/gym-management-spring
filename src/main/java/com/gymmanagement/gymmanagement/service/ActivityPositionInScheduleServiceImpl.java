@@ -45,4 +45,9 @@ public class ActivityPositionInScheduleServiceImpl implements ActivityPositionIn
     public List<ActivityPositionInSchedule> findPositionsByIdActivity(int id) {
         return activityPositionInScheduleRepository.findByActivity_IdActivity(id);
     }
+
+    @Override
+    public void deleteAllByDateLessThanEqual(Date date) {
+        activityPositionInScheduleRepository.deleteAllByDateLessThanEqual(date);
+    }
 }
