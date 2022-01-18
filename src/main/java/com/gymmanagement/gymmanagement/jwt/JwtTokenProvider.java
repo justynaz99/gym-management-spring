@@ -16,6 +16,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * In this class JWT generates token which is shared with http request between client and server side
+ */
+
 @Component
 public class JwtTokenProvider {
 

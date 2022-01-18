@@ -17,6 +17,9 @@ public class ActivityPositionInSchedule implements Serializable {
     @Column(name = "id_position")
     private Integer idPosition;
 
+    @Column(name = "activity_name")
+    private String activityName;
+
     @Column(name = "date")
     private Date date;
 
@@ -36,9 +39,9 @@ public class ActivityPositionInSchedule implements Serializable {
     private int maxParticipants;
 
     @ManyToOne
-    @JoinColumns({@JoinColumn(name = "id_activity", referencedColumnName = "id_activity", nullable = false),
-            @JoinColumn(name = "id_club", referencedColumnName = "id_club", nullable = false),
-            @JoinColumn(name = "id_network", referencedColumnName = "id_network", nullable = false)})
+    @JoinColumns({@JoinColumn(name = "id_activity", referencedColumnName = "id_activity"),
+            @JoinColumn(name = "id_club", referencedColumnName = "id_club"),
+            @JoinColumn(name = "id_network", referencedColumnName = "id_network")})
     private Activity activity;
 
 

@@ -14,12 +14,10 @@ public interface TicketRepository extends JpaRepository<MembershipTicket, Intege
 
     void deleteMembershipTicketByExpirationDateEquals(Date expirationDate);
 
-    MembershipTicket findByIdTicket(int id);
+    MembershipTicket findByIdTicket(int idTicket);
 
-    void deleteMembershipTicketByIdTicket(int id);
+    void deleteMembershipTicketByIdTicket(int idTicket);
 
-
-
-
+    List<MembershipTicket> findAllByMembershipTicketType_IdType(int idType);
 
 }

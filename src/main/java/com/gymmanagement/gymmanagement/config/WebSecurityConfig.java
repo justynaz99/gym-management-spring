@@ -27,40 +27,94 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private UserDetailsServiceImpl userDetailsService;
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * method to configure security
+     *
+     * @param http
+     * @throws Exception
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         //Cross-origin-resource-sharing
+        //permitted and unpermitted paths according to roles
         http.cors().and()
                 .authorizeRequests()
                 //These are public pages.
                 .antMatchers(
                         "/error",
-                        "/api/user/**",
-                        "/api/user_role/**",
-                        "/api/ticket/**",
-                        "/api/activity/**",
-                        "/api/ticket-type/**",
-                        "/api/schedule/**",
-                        "/api/enrollment/**",
-                        "/api/role/**"
-                        ).permitAll()
+                        "/api/role/**",
+                        "/api/activity/all",
+                        "/api/schedule/all",
+                        "/api/schedule/{date}/all",
+                        "/api/ticket-type/all",
+                        "/api/user-auth/registration",
+                        "/api/user-auth/login",
+                        "/api/user-auth/logout",
+                        "/api/user/generate_reset_token/{username}",
+                        "/api/user/find_by_token/{token}",
+                        "/api/user/token_validation/{token}",
+                        "/api/user/{id}/edit",
+                        "/api/user/{id}",
+                        "/api/user/{id}/edit-password"
+                ).permitAll()
                 //These can be reachable for just have user role.
-                .antMatchers().hasRole("USER")
+                .antMatchers(
+                        "/api/enrollment/sign_up",
+                        "/api/enrollment/{id}/all_by_user",
+                        "/api/enrollment/{id}",
+                        "/api/enrollment/{id}/delete",
+                        "/api/enrollment/{id_position}/{id_user}",
+
+                        "/api/schedule/{id}",
+                        "/api/schedule/{id}/edit",
+
+                        "/api/ticket/all/{id_user}",
+                        "/api/ticket/all",
+                        "/api/ticket/save",
+                        "api/ticket/update",
+
+                        "/api/ticket-type/{id}",
+
+                        "/api/user_role/{id}/add"
+                        ).hasAnyRole("USER", "ADMIN", "STAFF")
                 //These can be reachable for just have admin role.
-                .antMatchers("/api/admin/**")
-                .hasRole("ADMIN")
+                .antMatchers(
+                        "/api/activity/add",
+                        "/api/activity/{id}/edit",
+                        "/api/activity/{id}",
+                        "/api/activity/{id}/delete",
+
+                        "/api/enrollment/{id}/all_by_position",
+
+
+                        "/api/schedule/add",
+                        "/api/schedule/{id}/delete",
+                        "/api/schedule/delete",
+                        "/api/schedule/copy",
+
+                        "/api/ticket/{id_ticket}",
+                        "/api/ticket/{id_ticket}/delete",
+
+                        "/api/ticket-type/add",
+                        "/api/ticket-type/{id}/edit",
+                        "/api/ticket-type/{id}/delete",
+
+                        "/api/user/all",
+                        "/api/user/{role_name}/all_by_role"
+                )
+                .hasAnyRole("ADMIN", "STAFF")
                 //all remaining paths should need authentication.
                 .anyRequest().fullyAuthenticated()
                 .and()
                 //logout will log the user out by invalidate session.
                 .logout().permitAll()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/api/user/logout", "POST")).and()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/api/user-auth/logout", "POST")).and()
                 //login form and path
-                .formLogin().loginPage("/api/user/login").and()
+                .formLogin().loginPage("/api/user-auth/login").and()
                 //enable basic authentication. Http header: basis username:password
                 .httpBasic().and()
                 //Cross side request forgery.
@@ -76,7 +130,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     //Cross origin resource sharing.
     @Bean
-    public WebMvcConfigurer corsConfigurer(){
+    public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
@@ -85,3 +139,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         };
     }
 }
+
+//TODO
+//po najechaniu na "zapisz się" komunikat, że zajęcia już się odbyły

@@ -13,8 +13,11 @@ public interface TicketService {
 
     void deleteTicketByExpirationDate(Date expirationDate);
 
-    MembershipTicket findTicketByIdTicket(int id);
+    MembershipTicket findTicketByIdTicket(int idTicket);
 
-    void deleteTicketByIdTicket(int id);
+    void deleteTicketByIdTicket(int idTicket);
+
+    List<MembershipTicket> findAllByMembershipTicketType_IdType(int idType);
+
 
 }

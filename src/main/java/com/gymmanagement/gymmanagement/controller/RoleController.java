@@ -15,6 +15,10 @@ public class RoleController {
     @Autowired
     RoleService roleService;
 
+    /**
+     *
+     * @return object with info about all records from Role table
+     */
     @GetMapping("/api/role/all")
     public ResponseEntity<?> findAll() {
         return new ResponseEntity<>(roleService.findAll(), HttpStatus.OK);

@@ -15,6 +15,7 @@ public class UserRoleServiceImpl implements UserRoleService {
     @Autowired
     UserRoleRepository userRoleRepository;
 
+
     @Override
     public List<UserRole> findAllByIdUser(int id) {
         return userRoleRepository.findAllByIdUser(id);

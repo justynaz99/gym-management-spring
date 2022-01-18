@@ -15,11 +15,20 @@ public class RoleServiceImpl implements RoleService {
     @Autowired
     private RoleRepository roleRepository;
 
+    /**
+     *
+     * @param name of role to get
+     * @return role with name from param
+     */
     @Override
     public Role findByName(String name) {
         return roleRepository.findByName(name).orElse(null);
     }
 
+    /**
+     *
+     * @return all records from Role table
+     */
     @Override
     public List<Role> findAll() {
         return roleRepository.findAll();

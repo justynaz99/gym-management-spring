@@ -14,6 +14,11 @@ public class ClubServiceImpl implements ClubService {
     @Autowired
     ClubRepository clubRepository;
 
+    /**
+     *
+     * @param id of club to get
+     * @return club with id from param or null
+     */
     @Override
     public Club findClubById(int id) {
         return clubRepository.findById(id).orElse(null);

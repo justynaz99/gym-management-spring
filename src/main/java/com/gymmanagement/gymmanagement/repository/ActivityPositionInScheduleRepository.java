@@ -10,11 +10,13 @@ import java.util.List;
 @Repository
 public interface ActivityPositionInScheduleRepository extends JpaRepository<ActivityPositionInSchedule, Integer> {
 
-    List<ActivityPositionInSchedule> findAllByDateEquals(Date date);
+    List<ActivityPositionInSchedule> findAllByDateOrderByStartTimeAsc(Date date);
 
-    List<ActivityPositionInSchedule> findByActivity_IdActivity(int id);
+    List<ActivityPositionInSchedule> findAllByActivity_IdActivity(int id);
 
     ActivityPositionInSchedule findByIdPosition(int id);
 
     void deleteAllByDateLessThanEqual(Date date);
+
+
 }

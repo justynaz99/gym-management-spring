@@ -24,8 +24,12 @@ public class Enrollment implements Serializable {
     @Column(name = "id_network")
     private Integer idNetwork;
 
-    @Column(name = "id_user")
-    private Integer idUser;
+//    @Column(name = "id_user")
+//    private Integer idUser;
+
+    @ManyToOne
+    @JoinColumns({@JoinColumn(name = "id_user", referencedColumnName = "id_user", nullable = false)})
+    private User user;
 
     @ManyToOne
     @JoinColumns({@JoinColumn(name = "id_position", referencedColumnName = "id_position", nullable = false)})

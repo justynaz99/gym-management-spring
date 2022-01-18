@@ -25,49 +25,75 @@ public class ActivityPositionInScheduleController {
     @Autowired
     EnrollmentService enrollmentService;
 
+
+    /**
+     *
+     * @return object with info about all records from ActivityPositionInSchedule table
+     */
     @GetMapping("/api/schedule/all")
     public ResponseEntity<?> findAllPositions() {
         return ResponseEntity.ok(activityPositionInScheduleService.findAllPositions());
     }
 
+    /**
+     *
+     * @param date of positions to get
+     * @return object with info about all records with this date from ActivityPositionInSchedule table
+     */
     @GetMapping("/api/schedule/{date}/all")
     public ResponseEntity<?> findAllPositionsByDate(@PathVariable @DateTimeFormat(pattern = "dd.MM.yyyy") Date date) {
         return ResponseEntity.ok(activityPositionInScheduleService.findAllPositionsByDate(date));
     }
 
+
+    /**
+     *
+     * @param position to add
+     * @return object with info about added position and status code
+     */
     @PostMapping("/api/schedule/add")
     public ResponseEntity<?> addPosition(@RequestBody ActivityPositionInSchedule position) {
+
         return new ResponseEntity<>(activityPositionInScheduleService.savePosition(position), HttpStatus.CREATED);
     }
 
+
+    /**
+     *
+     * @param id of position to edit
+     * @param position to edit
+     * @return object with info about edited position and status code
+     */
     @PutMapping("/api/schedule/{id}/edit")
     public ResponseEntity<ActivityPositionInSchedule> updatePosition(@PathVariable int id, @RequestBody ActivityPositionInSchedule position) {
         return new ResponseEntity<>(activityPositionInScheduleService.savePosition(position), HttpStatus.OK);
     }
 
+    /**
+     *
+     * @param id of position to get
+     * @return object with info about this position
+     */
     @GetMapping("/api/schedule/{id}")
     public ResponseEntity<ActivityPositionInSchedule> findPositionById(@PathVariable int id) {
-        return new ResponseEntity<>(activityPositionInScheduleService.findPositionById(id), HttpStatus.OK);
+        return ResponseEntity.ok(activityPositionInScheduleService.findPositionById(id));
     }
 
+    /**
+     *
+     * @param id of position to delete
+     * @return object with edited position's id and status code
+     */
     @DeleteMapping("/api/schedule/{id}/delete")
     public ResponseEntity<?> deletePosition(@PathVariable int id) {
         activityPositionInScheduleService.deletePosition(id);
         return new ResponseEntity<>(id, HttpStatus.OK);
     }
 
-//    @Scheduled(cron = "0 0/1 * * * *")
-//    public void print() {
-//        Date date = new Date();
-//        System.out.println(date);
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.setTime(date);
-//        calendar.add(Calendar.DAY_OF_MONTH, -3);
-//        Date dateMinusThree = calendar.getTime();
-//        System.out.println(dateMinusThree);
-//    }
-
-
+    /**
+     * method to delete positions from one week ago day
+     * to keep only one week's schedule history and to automatically remove records
+     */
     @DeleteMapping("/api/schedule/delete")
     @Scheduled(cron = "0 0 1 * * *")
     public void deletePositionByDate() {
@@ -75,27 +101,34 @@ public class ActivityPositionInScheduleController {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         calendar.add(Calendar.DAY_OF_MONTH, -7);
-        Date dateMinusThree = calendar.getTime();
-        enrollmentService.deleteByPosition_Date(dateMinusThree);
-        activityPositionInScheduleService.deleteAllByDateLessThanEqual(dateMinusThree);
+        Date dateMinusSeven = calendar.getTime();
+        enrollmentService.deleteByPosition_Date(dateMinusSeven); //deletes all enrollments with one week ago date to enable deleting positions
+        activityPositionInScheduleService.deleteAllByDateLessThanEqual(dateMinusSeven);
     }
 
+    /**
+     * method to copy records from today's schedule to in one week schedule
+     * enables automatic schedule creation one week in advance
+     * finds all today's positions and copy them with plus seven days date
+     */
     @PostMapping("/api/schedule/copy")
     @Scheduled(cron = "0 0 1 * * *")
     public void copyAllByDate() {
         Date date = new Date();
         Calendar calendar = Calendar.getInstance();
         System.out.println(date);
+        //finds all today's positions
         List<ActivityPositionInSchedule> positions = activityPositionInScheduleService.findAllPositionsByDate(date);
         calendar.setTime(date);
         calendar.add(Calendar.DAY_OF_MONTH, 7);
         Date datePlusSeven = calendar.getTime();
         java.sql.Date datePlusSevenSql = new java.sql.Date(datePlusSeven.getTime());
         System.out.println(positions);
+        //loop to copy all today's position and change their date's to plus seven days date and save it
         for (ActivityPositionInSchedule position: positions) {
             ActivityPositionInSchedule newPosition = new ActivityPositionInSchedule();
             BeanUtils.copyProperties(position, newPosition);
-            newPosition.setIdPosition(null);
+            newPosition.setIdPosition(null); //set to null bc it should be generated automatically
             newPosition.setDate(datePlusSevenSql);
             activityPositionInScheduleService.savePosition(position);
             activityPositionInScheduleService.savePosition(newPosition);

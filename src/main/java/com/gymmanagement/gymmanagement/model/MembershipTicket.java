@@ -16,6 +16,9 @@ public class MembershipTicket implements Serializable {
     @Column(name = "id_ticket")
     private int idTicket;
 
+    @Column(name = "ticket_name")
+    private String ticketName;
+
     @Column(name = "activation_date")
     private Date activationDate;
 
@@ -35,7 +38,7 @@ public class MembershipTicket implements Serializable {
     private int idNetwork;
 
     @ManyToOne
-    @JoinColumns({@JoinColumn(name = "id_type", referencedColumnName = "id_type", nullable = false)})
+    @JoinColumns({@JoinColumn(name = "id_type", referencedColumnName = "id_type")})
     private MembershipTicketType membershipTicketType;
 
 

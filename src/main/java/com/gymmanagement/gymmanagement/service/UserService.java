@@ -1,5 +1,6 @@
 package com.gymmanagement.gymmanagement.service;
 
+import com.gymmanagement.gymmanagement.model.Role;
 import com.gymmanagement.gymmanagement.model.User;
 
 import java.util.List;
@@ -13,8 +14,6 @@ public interface UserService {
 
     List<User> findAllUsers();
 
-    void updateResetPasswordToken(String token, String username);
-
     User findByResetPasswordToken(String token);
 
     void updatePassword(User user, String newPassword);
@@ -22,4 +21,8 @@ public interface UserService {
     User findUserById(int id);
 
     void deleteUserByIdUser(int id);
+
+    List<User> findAllByRolesIsStartingWith(Role role);
+
+
 }
