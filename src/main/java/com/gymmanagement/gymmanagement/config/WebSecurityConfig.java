@@ -75,11 +75,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/api/ticket/all/{id_user}",
                         "/api/ticket/all",
                         "/api/ticket/save",
-                        "api/ticket/update",
+                        "/api/ticket/update",
 
                         "/api/ticket-type/{id}",
 
-                        "/api/user_role/{id}/add"
+                        "/api/user_role/{id}/add",
+
+                        "/api/role/{name}"
                         ).hasAnyRole("USER", "ADMIN", "STAFF")
                 //These can be reachable for just have admin role.
                 .antMatchers(

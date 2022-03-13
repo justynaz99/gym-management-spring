@@ -202,7 +202,7 @@ public class UserController {
             MimeMessage mimeMessage = javaMailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
             String htmlMessage = "<h3>Resetowanie hasła</h3>" +
-                    "<br/> Kliknij link: http://localhost:4200/reset-password/" + token;
+                    "<br/> Aby zresetować hasło kliknij w poniższy link: http://localhost:4200/reset-password/" + token;
             helper.setText(htmlMessage, true);
             helper.setTo(username);
             helper.setSubject("Reset hasła");
